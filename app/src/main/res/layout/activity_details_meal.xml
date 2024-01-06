@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.DetailsMeal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/fl_image_meal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/iv_detail_meal_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                tools:src="@drawable/burger"
+                />
+
+            <TextView
+                android:id="@+id/tv_detail_meal_tittle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|start"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="#4D000000"
+                android:drawablePadding="4dp"
+                android:padding="8dp"
+                tools:text="Tittle Meal"
+                android:textSize="30sp"
+                android:textColor="@android:color/white" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tv_instructions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Instruksi"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fl_image_meal" />
+
+        <TextView
+            android:id="@+id/tv_meal_instructions"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod, nisl eget ultricies aliquam, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl. Donec euismod, nisl eget ultricies aliquam, nisl nisl aliquet nisl, vitae aliquam nisl nisl vitae nisl."
+            android:textAlignment="inherit"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tv_instructions"
+            app:layout_constraintTop_toBottomOf="@+id/tv_instructions" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_margin="16dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintTop_toBottomOf="@+id/tv_meal_instructions"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <TextView
+            android:id="@+id/tv_ingredients"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:layout_margin="16dp"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_meal_instructions" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@drawable/baseline_bookmark_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </ScrollView>
