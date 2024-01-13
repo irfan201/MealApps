@@ -24,8 +24,23 @@
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                tools:src="@drawable/burger"
-                />
+                tools:src="@drawable/burger" />
+
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtubePlayerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+
+            <ImageButton
+                android:id="@+id/btn_play_video"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_play"
+            android:contentDescription="Play Video"
+            android:padding="16dp" />
 
             <TextView
                 android:id="@+id/tv_detail_meal_tittle"

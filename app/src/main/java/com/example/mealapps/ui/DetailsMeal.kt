@@ -1,7 +1,11 @@
 package com.example.mealapps.ui
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,6 +16,10 @@ import com.example.mealapps.databinding.ActivityDetailsMealBinding
 import com.example.mealapps.local.MealDatabase
 import com.example.mealapps.local.entity.MealEntity
 import com.example.mealapps.util.DetailMealViewModelFactory
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerCallback
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 
 class DetailsMeal : AppCompatActivity() {
 
@@ -148,6 +156,12 @@ class DetailsMeal : AppCompatActivity() {
 
                 tvMealInstructions.text = mealDetail.strInstructions
                 tvDetailMealTittle.text = mealDetail.strMeal
+                btnPlayVideo.setOnClickListener {
+                    val videoUrl = mealDetail.strYoutube
+                    if (!videoUrl.isNullOrEmpty()) {
+                        playVideo(videoUrl)
+                    }
+                }
                 Glide.with(this@DetailsMeal)
                     .load(mealDetail.strMealThumb)
                     .into(ivDetailMealImage)
@@ -188,5 +202,29 @@ class DetailsMeal : AppCompatActivity() {
             R.drawable.baseline_bookmark_border_24
         }
         binding.fabFavorite.setImageResource(imageResource)
+    }
+
+    private fun playVideo(videoUrl: String) {
+        val youTubePlayerView: YouTubePlayerView = binding.youtubePlayerView
+
+        youTubePlayerView.visibility = View.VISIBLE
+        lifecycle.addObserver(youTubePlayerView)
+
+        youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer) {
+                val videoId = extractVideoId(videoUrl)
+                youTubePlayer.loadVideo(videoId, 0f)
+                youTubePlayer.play()
+            }
+        })
+
+        // Sembunyikan ImageView dan TextView
+        binding.ivDetailMealImage.visibility = View.GONE
+        binding.tvDetailMealTittle.visibility = View.GONE
+        binding.btnPlayVideo.visibility = View.GONE
+    }
+
+    private fun extractVideoId(videoUrl: String): String {
+        return videoUrl.substringAfterLast("v=")
     }
 }
